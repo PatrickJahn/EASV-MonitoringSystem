@@ -1,0 +1,28 @@
+services:
+
+  
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user123
+      - RABBITMQ_DEFAULT_PASS=123456
+    ports:
+      - "5672:5672"   # RabbitMQ message broker port
+      - "15672:15672" # RabbitMQ management UI
+      
+  monitoring-api:
+    build:
+      context: .
+      dockerfile: MonitoringAPI/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  logging-service:
+    build:
+      context: .
+      dockerfile: LoggingService/Dockerfile
+    ports:
+      - "5002:80"
+    depends_on: 
+      - rabbitmq
+

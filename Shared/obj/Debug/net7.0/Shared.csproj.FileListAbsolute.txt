@@ -1,0 +1,24 @@
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/bin/Debug/net7.0/Shared.deps.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/bin/Debug/net7.0/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/bin/Debug/net7.0/Shared.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.csproj.AssemblyReference.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.AssemblyInfoInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.AssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.csproj.CoreCompileInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/refint/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/Shared.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/Shared/obj/Debug/net7.0/ref/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/bin/Debug/net7.0/Shared.deps.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/bin/Debug/net7.0/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/bin/Debug/net7.0/Shared.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.csproj.AssemblyReference.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.AssemblyInfoInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.AssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.csproj.CoreCompileInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/refint/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/Shared.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/Shared/obj/Debug/net7.0/ref/Shared.dll

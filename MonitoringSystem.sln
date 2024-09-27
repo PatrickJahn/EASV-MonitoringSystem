@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitoringAPI", "MonitoringAPI\MonitoringAPI.csproj", "{F8CB336B-466F-4D88-BC97-914D31597FC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingService", "LoggingService\LoggingService.csproj", "{40160B42-B0A9-448B-88A1-7D871BD29EBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B0685420-033E-4D0A-8366-DC6C9278E396}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8CB336B-466F-4D88-BC97-914D31597FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8CB336B-466F-4D88-BC97-914D31597FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8CB336B-466F-4D88-BC97-914D31597FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8CB336B-466F-4D88-BC97-914D31597FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40160B42-B0A9-448B-88A1-7D871BD29EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40160B42-B0A9-448B-88A1-7D871BD29EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40160B42-B0A9-448B-88A1-7D871BD29EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40160B42-B0A9-448B-88A1-7D871BD29EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0685420-033E-4D0A-8366-DC6C9278E396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0685420-033E-4D0A-8366-DC6C9278E396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0685420-033E-4D0A-8366-DC6C9278E396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0685420-033E-4D0A-8366-DC6C9278E396}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,72 @@
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/appsettings.Development.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/appsettings.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.deps.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.runtimeconfig.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.AssemblyReference.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.AssemblyInfoInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.AssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.CoreCompileInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.MvcApplicationPartsAssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.MvcApplicationPartsAssemblyInfo.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.LoggingService.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.build.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.build.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.development.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/scopedcss/bundle/LoggingService.styles.css
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.CopyComplete
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/refint/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.genruntimeconfig.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/Software Quality/Exam/MonitoringSystem/LoggingService/obj/Debug/net7.0/ref/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/appsettings.Development.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/appsettings.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.deps.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.runtimeconfig.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/LoggingService.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/EasyNetQ.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/EasyNetQ.Serialization.NewtonsoftJson.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/RabbitMQ.Client.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Shared.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/bin/Debug/net7.0/Shared.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.AssemblyReference.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.AssemblyInfoInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.AssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.CoreCompileInputs.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.MvcApplicationPartsAssemblyInfo.cs
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.MvcApplicationPartsAssemblyInfo.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.LoggingService.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.build.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.LoggingService.props
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.build.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/staticwebassets.development.json
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/scopedcss/bundle/LoggingService.styles.css
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.csproj.CopyComplete
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/refint/LoggingService.dll
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.pdb
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/LoggingService.genruntimeconfig.cache
+/Users/patrickjakobsenjahn/Desktop/Uddanelse/EASV Software Development/DLS/EASV-MonitoringSystem/LoggingService/obj/Debug/net7.0/ref/LoggingService.dll

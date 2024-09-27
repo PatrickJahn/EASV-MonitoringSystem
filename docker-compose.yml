@@ -35,5 +35,5 @@ services:
     depends_on: 
       - rabbitmq
 
-volumes: 
-  logs:
+volumes:
+  mssql-data-logs:

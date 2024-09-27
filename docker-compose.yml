@@ -1,5 +1,14 @@
 services:
-
+  
+  
+  log-db:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    environment:
+      MSSQL_SA_PASSWORD: "SuperSecret7!"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssql-data-logs:/var/opt/mssql
+  
   
   rabbitmq:
     image: "rabbitmq:3-management"
@@ -26,3 +35,5 @@ services:
     depends_on: 
       - rabbitmq
 
+volumes: 
+  logs:

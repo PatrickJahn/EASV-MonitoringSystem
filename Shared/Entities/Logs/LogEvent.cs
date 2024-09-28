@@ -14,7 +14,7 @@ public class LogEvent
     
     public int LineNumber { get; set; }
 
-    public Exception? ErrorDetails { get; set; }
+    public string? ErrorDetails { get; set; }
     
     public DateTime CreatedAt { get; set; }
     

@@ -1,133 +1,130 @@
 using System.Data;
-using System.Data.Common;
-using System.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Shared.Entities.Logs;
 
-namespace LoggingService.Services;
-
-public class Database
+namespace LoggingService.Services
 {
-    
-    
-    private SqlConnection? _connection;
-
-    private DbConnection GetDbConnection()
+    public class Database
     {
-        if (_connection != null) 
-            return _connection;
-            
-        var  connection = new SqlConnection($"Server=log-db;User Id=sa;Password=SuperSecret7!;Encrypt=false;");
-        connection.Open();
+        private readonly string _connectionString;
 
-        _connection = connection;
-        return connection;
-    }
+        public Database(string dbHost, string dbUser, string dbPass)
+        {
+            _connectionString = $"Server={dbHost};User Id={dbUser};Password={dbPass};Encrypt=false;";
+        }
 
+        private async Task<SqlConnection> GetDbConnectionAsync()
+        {
+            var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+            return connection;
+        }
 
-        // Execute method with proper exception handling and transaction management
-        private void Execute(IDbConnection connection, string sql)
+        private static async Task ExecuteAsync(SqlConnection connection, string sql)
         {
             try
             {
-                using var trans = connection.BeginTransaction();
-                var cmd = connection.CreateCommand();
-                cmd.Transaction = trans;
+                await using var trans = (SqlTransaction)await connection.BeginTransactionAsync();
+
+                await using var cmd = connection.CreateCommand();
+                cmd.Transaction = trans;  
                 cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-                trans.Commit();
+                await cmd.ExecuteNonQueryAsync();
+        
+                await trans.CommitAsync();  
             }
             catch (SqlException ex)
             {
+                Console.WriteLine($"Error executing SQL: {ex.Message}");
                 throw;
             }
-           
         }
 
-     
-
-        // Method to recreate the database (recreate tables)
-        public void RecreateDatabase()
+        // Async method to recreate the database schema for testing or resetting
+        public async Task RecreateDatabaseAsync()
         {
-            var connection = GetDbConnection();
-
+            await using var connection = await GetDbConnectionAsync();
             try
             {
-                Execute(connection, "DROP TABLE IF EXISTS LogEvents");
+                // Drop the table if it exists
+                await ExecuteAsync(connection, "DROP TABLE IF EXISTS LogEvents");
 
-                Execute(connection, "CREATE TABLE LogEvents(id uniqueidentifier PRIMARY KEY, logEventType integer, message varchar(500), memberName varchar(500) null, filePath varchar(500) null, lineNumber integer null, errorDetalis varchar(500) null, createdAt DATE)");
+                // Create the LogEvents table
+                await ExecuteAsync(connection, @"
+                    CREATE TABLE LogEvents (
+                        Id UNIQUEIDENTIFIER PRIMARY KEY, 
+                        LogEventType INT, 
+                        Message NVARCHAR(500), 
+                        MemberName NVARCHAR(500) NULL, 
+                        FilePath NVARCHAR(500) NULL, 
+                        LineNumber INT NULL, 
+                        ErrorDetails NVARCHAR(500) NULL, 
+                        CreatedAt DATETIME
+                    )");
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error recreating database: {ex.Message}");
                 throw;
             }
-        
-        }
-        
-        // Method to insert documents
-        public async Task InsertLogEvent(LogEvent logEvent)
-        {
-
-                var connection = GetDbConnection();
-                var insertCmd = connection.CreateCommand();
-                insertCmd.CommandText = "INSERT INTO LogEvents(id, logEventType, message, memberName, filePath, lineNumber, errorDetalis, createdAt) VALUES(@id,@logEventType,@message,@memberName,@filePath,@lineNumber,@errorDetails,@createdAt)";
-
-                var pId = new SqlParameter("id", logEvent.Id);
-                var pType = new SqlParameter("logEventType", logEvent.LogEventType);
-                var pMessage = new SqlParameter("message", logEvent.Message);
-                var pMemberName = new SqlParameter("memberName", logEvent.MemberName ?? "");
-                var pFilePath = new SqlParameter("filePath", logEvent.FilePath ?? "");
-                var pLineNumber = new SqlParameter("lineNumber", logEvent.LineNumber);
-                var pError = new SqlParameter("errorDetails", logEvent.ErrorDetails ?? "");
-                var pCreatedAt = new SqlParameter("createdAt", logEvent.CreatedAt);
-
-                insertCmd.Parameters.Add(pId);
-                insertCmd.Parameters.Add(pType);
-                insertCmd.Parameters.Add(pMessage);
-                insertCmd.Parameters.Add(pMemberName);
-                insertCmd.Parameters.Add(pFilePath);
-                insertCmd.Parameters.Add(pLineNumber);
-                insertCmd.Parameters.Add(pError);
-                insertCmd.Parameters.Add(pCreatedAt);
-
-                await insertCmd.ExecuteNonQueryAsync();
-            
         }
 
-        public List<LogEvent> GetLogEvents()
+        // Method to insert a log event asynchronously
+        public async Task InsertLogEventAsync(LogEvent logEvent)
         {
-            var connection = GetDbConnection();
-            var sql = @"SELECT * FROM LogEvents";
-            var selectCmd = connection.CreateCommand();
-            selectCmd.CommandText = sql;
-            List<LogEvent> logEvents = new List<LogEvent>();
-            using (var reader = selectCmd.ExecuteReader())
+            await using var connection = await GetDbConnectionAsync();
+            await using var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                INSERT INTO LogEvents (Id, LogEventType, Message, MemberName, FilePath, LineNumber, ErrorDetails, CreatedAt) 
+                VALUES (@Id, @LogEventType, @Message, @MemberName, @FilePath, @LineNumber, @ErrorDetails, @CreatedAt)";
+
+            cmd.Parameters.Add(new SqlParameter("@Id", logEvent.Id));
+            cmd.Parameters.Add(new SqlParameter("@LogEventType", logEvent.LogEventType));
+            cmd.Parameters.Add(new SqlParameter("@Message", logEvent.Message));
+            cmd.Parameters.Add(new SqlParameter("@MemberName", logEvent.MemberName ?? (object)DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@FilePath", logEvent.FilePath ?? (object)DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@LineNumber", logEvent.LineNumber.HasValue ? (object)logEvent.LineNumber : DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@ErrorDetails", logEvent.ErrorDetails ?? (object)DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@CreatedAt", logEvent.CreatedAt));
+
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        // Async method to retrieve paginated log events
+        public async Task<List<LogEvent>> GetLogEventsAsync(int page, int pageSize)
+        {
+            var logEvents = new List<LogEvent>();
+            await using var connection = await GetDbConnectionAsync();
+            await using var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                SELECT * FROM LogEvents 
+                ORDER BY CreatedAt DESC 
+                OFFSET @Offset ROWS 
+                FETCH NEXT @PageSize ROWS ONLY";
+
+            var offset = (page - 1) * pageSize;
+
+            cmd.Parameters.Add(new SqlParameter("@Offset", offset));
+            cmd.Parameters.Add(new SqlParameter("@PageSize", pageSize));
+
+            await using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
             {
-                while (reader.Read())
+                var logEvent = new LogEvent
                 {
-                    var id = reader.GetGuid(0);
-                    var logEventType = (LogEventType) reader.GetInt16(1);
-                    var message = reader.GetString(2);
-                    var memberName = reader.GetString(3);
-                    var filePath = reader.GetString(4);
-                    var lineNumber = reader.GetInt32(5);
-                    var errorDetails = reader.GetString(6);
-                    var createdAt = reader.GetDateTime(7);
-
-                    logEvents.Add(new LogEvent()
-                    {
-                        Id = id,
-                        LogEventType = logEventType,
-                        Message = message,
-                        MemberName = memberName,
-                        FilePath = filePath,
-                        LineNumber = lineNumber,
-                        ErrorDetails = errorDetails,
-                        CreatedAt = createdAt
-                    });
-                }
+                    Id = reader.GetGuid(0),
+                    LogEventType = (LogEventType)reader.GetInt32(1),
+                    Message = reader.GetString(2),
+                    MemberName = reader.IsDBNull(3) ? null : reader.GetString(3),
+                    FilePath = reader.IsDBNull(4) ? null : reader.GetString(4),
+                    LineNumber = reader.IsDBNull(5) ? (int?)null : reader.GetInt32(5),
+                    ErrorDetails = reader.IsDBNull(6) ? null : reader.GetString(6),
+                    CreatedAt = reader.GetDateTime(7)
+                };
+                logEvents.Add(logEvent);
             }
+
             return logEvents;
         }
-
+    }
 }

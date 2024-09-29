@@ -1,20 +1,31 @@
 using EasyNetQ;
 using LoggingService.Services;
-using Shared.Messages.Logs;
-using Shared.Messages.Topics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Get RabbitMQ and Database connection details from environment variables
+var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+var rabbitMqPort = Environment.GetEnvironmentVariable("RABBITMQ_PORT") ?? "5672";
+var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "guest";
+var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "guest";
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST") ?? "localhost";
+var dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? "sa";
+var dbPass = Environment.GetEnvironmentVariable("DB_PASS") ?? "SuperSecret7!";
+
+// Construct RabbitMQ connection string
+var rabbitMqConnectionString = $"host={rabbitMqHost};port={rabbitMqPort};username={rabbitMqUser};password={rabbitMqPass}";
+
+// Register services
+builder.Services.AddScoped<ILogService, LogService>();
+builder.Services.AddSingleton<Database>(serviceProvider => new Database(dbHost, dbUser, dbPass)); // Pass DB details here
+builder.Services.AddSingleton<IBus>(bus => RabbitHutch.CreateBus(rabbitMqConnectionString));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -22,11 +33,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
-MessageSubscriber.StartSubscribing();
+using (var scope = app.Services.CreateScope())
+{
+    var logService = scope.ServiceProvider.GetRequiredService<ILogService>();
+    MessageSubscriber.StartSubscribing(logService);
+}
 
 app.Run();

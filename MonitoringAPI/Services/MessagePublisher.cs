@@ -1,28 +1,28 @@
 using EasyNetQ;
 using Shared.Messages.Logs;
-using Shared.Messages.Topics;
 
-namespace MonitoringAPI.Services;
-
-public class MessagePublisher : IMessagePublisher
+namespace MonitoringAPI.Services
 {
-    
-    public async Task PublishLogEventMessage(LogEventMessage dto)
+    public class MessagePublisher : IMessagePublisher
     {
-        
-        try
-        {
-            Console.WriteLine("SENDING LOG EVENT MESSAGE");
-            using var bus = RabbitHutch.CreateBus("host=rabbitmq;port=5672;username=user123;password=123456");
-            await bus.PubSub.PublishAsync(dto, ServiceBusTopic.LogEvent.ToString());
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        
-    }
+        private readonly IBus _bus;
 
-   
+        public MessagePublisher(IBus bus)
+        {
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+        }
+
+        public async Task PublishLogEventMessage(LogEventMessage logEventMessage)
+        {
+            try
+            {
+                await _bus.PubSub.PublishAsync(logEventMessage, "log-events");
+                Console.WriteLine("Log event published.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error publishing log event: {ex.Message}");
+            }
+        }
+    }
 }

@@ -12,7 +12,7 @@ public class LogEvent
     
     public string FilePath { get; set; }
     
-    public int LineNumber { get; set; }
+    public int? LineNumber { get; set; }
 
     public string? ErrorDetails { get; set; }
     

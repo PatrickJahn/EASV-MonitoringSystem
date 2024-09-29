@@ -1,6 +1,6 @@
 using Shared.Entities.Logs;
 
-namespace MonitoringAPI.Controllers.Requests;
+namespace MonitoringAPI.Controllers.Logging.Requests;
 
 public class CreateEventLogRequest 
 {

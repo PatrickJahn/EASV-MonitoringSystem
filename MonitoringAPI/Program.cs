@@ -1,37 +1,40 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MonitoringAPI.Services;
-using Shared.Entities.Logs;
-using Shared.Messages.Logs;
+using EasyNetQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+var rabbitMqPort = Environment.GetEnvironmentVariable("RABBITMQ_PORT") ?? "5672";
+var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "guest";
+var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "guest";
 
+var rabbitMqConnectionString = $"host={rabbitMqHost};port={rabbitMqPort};username={rabbitMqUser};password={rabbitMqPass}";
+
+builder.Services.AddSingleton<IBus>(bus => RabbitHutch.CreateBus(rabbitMqConnectionString));
+
+// Register MessagePublisher and other services
 builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
+builder.Services.AddScoped<LogServiceRequester>();
+builder.Services.AddSingleton<LogServiceResponseHandler>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
+
+// Ensure that LogServiceResponseHandler starts consuming log responses
+using (var scope = app.Services.CreateScope())
+{
+    var logResponseHandler = scope.ServiceProvider.GetRequiredService<LogServiceResponseHandler>();
+}
 
 app.Run();

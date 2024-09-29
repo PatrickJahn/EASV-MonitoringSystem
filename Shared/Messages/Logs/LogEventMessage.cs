@@ -12,7 +12,7 @@ public class LogEventMessage
     
     public string FilePath { get; set; }
     
-    public int LineNumber { get; set; }
+    public int? LineNumber { get; set; }
     
     public Exception? ErrorDetails { get; set; }
     

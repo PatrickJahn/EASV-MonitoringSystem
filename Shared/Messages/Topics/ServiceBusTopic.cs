@@ -4,6 +4,9 @@ public enum ServiceBusTopic
 { 
     LogEvent,
     TraceEvent,
-    Metric
+    Metric,
+    
+    LogRequest,
+
     
 }

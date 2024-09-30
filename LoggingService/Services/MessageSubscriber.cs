@@ -81,7 +81,7 @@ namespace LoggingService.Services
                     {
                         Console.WriteLine($"Error processing log request: {ex.Message}");
                     }
-                });
+                },x => x.WithTopic(ServiceBusTopic.LogRequest.ToString()));
         }
 
         private static async Task PublishLogResponse(List<LogEvent> logs)

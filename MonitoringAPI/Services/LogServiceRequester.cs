@@ -1,6 +1,7 @@
 using EasyNetQ;
 using Shared.Entities.Logs;
 using Shared.Messages.Logs;
+using Shared.Messages.Topics;
 
 namespace MonitoringAPI.Services
 {
@@ -23,7 +24,7 @@ namespace MonitoringAPI.Services
                 PageSize = pageSize
             };
 
-            await _bus.PubSub.PublishAsync(requestMessage, "log-requests");
+            await _bus.PubSub.PublishAsync(requestMessage, ServiceBusTopic.LogRequest.ToString());
 
             // Wait for the response (consider adding a timeout mechanism)
             return await _taskCompletionSource.Task;

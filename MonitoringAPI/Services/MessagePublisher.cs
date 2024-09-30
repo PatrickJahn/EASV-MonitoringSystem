@@ -1,5 +1,6 @@
 using EasyNetQ;
 using Shared.Messages.Logs;
+using Shared.Messages.Topics;
 
 namespace MonitoringAPI.Services
 {
@@ -16,7 +17,7 @@ namespace MonitoringAPI.Services
         {
             try
             {
-                await _bus.PubSub.PublishAsync(logEventMessage, "log-events");
+                await _bus.PubSub.PublishAsync(logEventMessage, ServiceBusTopic.LogEvent.ToString());
                 Console.WriteLine("Log event published.");
             }
             catch (Exception ex)

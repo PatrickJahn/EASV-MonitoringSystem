@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MonitoringAPI.Controllers.Requests;
+using MonitoringAPI.Controllers.Logging.Requests;
 using MonitoringAPI.Services;
 using Shared.Entities.Logs;
 using Shared.Messages.Logs;
@@ -11,18 +11,28 @@ namespace MonitoringAPI.Controllers;
 [Route("[controller]")]
 public class LoggingController : ControllerBase
 {
+    private readonly LogServiceRequester _logServiceRequester;
 
     private readonly IMessagePublisher _messagePublisher;
-    public LoggingController(IMessagePublisher messagePublisher)
+    public LoggingController(IMessagePublisher messagePublisher, LogServiceRequester logServiceRequester)
     {
         _messagePublisher = messagePublisher ?? throw new ArgumentNullException(nameof(messagePublisher));
+        _logServiceRequester = logServiceRequester;
+
     }
 
 
     [HttpGet(Name = "GetLogs")]
-    public async Task<IEnumerable<LogEvent>> GetLogs()
+    public async Task<IActionResult> GetLogs([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        throw new NotImplementedException();
+        var logs = await _logServiceRequester.RequestLogsAsync(page, pageSize);
+
+        if (logs == null || !logs.Any())
+        {
+            return NotFound("No logs found.");
+        }
+
+        return Ok(logs);
     }
     
     [HttpPost]

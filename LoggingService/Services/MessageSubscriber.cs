@@ -3,73 +3,96 @@ using Polly;
 using Shared.Entities.Logs;
 using Shared.Messages.Logs;
 using Shared.Messages.Topics;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace LoggingService.Services;
-
-public static class MessageSubscriber
+namespace LoggingService.Services
 {
-
-    private static readonly IBus bus = RabbitHutch.CreateBus("host=rabbitmq;port=5672;username=user123;password=123456");
-
-    private static readonly Database database = new Database();
-
-
-
-    public static void StartSubscribing()
+    public static class MessageSubscriber
     {
-        
-  
- 
-        // Wait for rabitmq to start
-        Thread.Sleep(6000);
-        SubscribeToLogEvents();
-    }
+        private static readonly IBus bus = RabbitHutch.CreateBus("host=rabbitmq;port=5672;username=user123;password=123456");
+        private static ILogService _logService;
 
-    private static async void SubscribeToLogEvents()
-    {
+        public static void StartSubscribing(ILogService logService)
+        {
+            // Injecting LogService
+            _logService = logService;
 
-        await bus.PubSub.SubscribeAsync<LogEventMessage>("LogEvents",
-            async message =>
-            {
-                // Retry the message handling logic 2 times
-                var retryPolicy = Policy
-                    .Handle<Exception>()
-                    .WaitAndRetryAsync(2, _ => TimeSpan.FromMinutes(1));
+            // Wait for RabbitMQ to start
+            Thread.Sleep(6000);
 
-                try
+            // Subscribe to log events and log requests
+            SubscribeToLogEvents();
+            SubscribeToLogRequests();
+        }
+
+        private static async void SubscribeToLogEvents()
+        {
+            await bus.PubSub.SubscribeAsync<LogEventMessage>("LogEvents",
+                async message =>
                 {
-                    await retryPolicy.ExecuteAsync(async () =>
+                    // Retry the message handling logic 2 times
+                    var retryPolicy = Policy
+                        .Handle<Exception>()
+                        .WaitAndRetryAsync(2, _ => TimeSpan.FromMinutes(1));
+
+                    try
                     {
-                        Console.WriteLine("Handling message...");
-                        await CreateLogEvent(message);
-                    });
-                }
-                catch (Exception ex)
+                        await retryPolicy.ExecuteAsync(async () =>
+                        {
+                            Console.WriteLine("Handling log event message...");
+                            await _logService.InsertLogEventAsync(new LogEvent
+                            {
+                                Id = Guid.NewGuid(),
+                                Message = message.Message,
+                                LineNumber = message.LineNumber,
+                                FilePath = message.FilePath,
+                                MemberName = message.MemberName,
+                                LogEventType = message.LogEventType,
+                                ErrorDetails = message.ErrorDetails?.Message,
+                                CreatedAt = message.CreatedAt
+                            });
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Message processing failed after retries: {ex.Message}");
+                    }
+                }, x => x.WithTopic(ServiceBusTopic.LogEvent.ToString()));
+        }
+
+        private static async void SubscribeToLogRequests()
+        {
+            await bus.PubSub.SubscribeAsync<LogRequestMessage>("LogRequests",
+                async request =>
                 {
-                    Console.WriteLine($"Message processing failed after retries: {ex.Message}");
+                    // Handle the log request and retrieve logs
+                    try
+                    {
+                        Console.WriteLine("Handling log request...");
+                        var logs = await _logService.GetLogEventsAsync(request.Page, request.PageSize);
 
-                }
-            }, x => x.WithTopic(ServiceBusTopic.LogEvent.ToString()));
-    }
+                        // Publish the response back to RabbitMQ
+                        await PublishLogResponse(logs);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error processing log request: {ex.Message}");
+                    }
+                },x => x.WithTopic(ServiceBusTopic.LogRequest.ToString()));
+        }
 
-
-    private static async Task CreateLogEvent(LogEventMessage message)
-    {
-
-        await database.InsertLogEvent(new LogEvent()
+        private static async Task PublishLogResponse(List<LogEvent> logs)
+        {
+            var responseMessage = new LogResponseMessage
             {
-                Id = Guid.NewGuid(),
-                Message = message.Message,
-                LineNumber = message.LineNumber,
-                FilePath = message.FilePath,
-                MemberName = message.MemberName,
-                LogEventType = message.LogEventType,
-                ErrorDetails = message.ErrorDetails?.Message,
-                CreatedAt = message.CreatedAt
-            });
+                LogEvents = logs
+            };
+
+            await bus.PubSub.PublishAsync(responseMessage, "log-response");
+            Console.WriteLine("Published log response.");
+        }
     }
-    
-
-
-
 }

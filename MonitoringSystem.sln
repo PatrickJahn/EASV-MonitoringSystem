@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingService", "LoggingSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B0685420-033E-4D0A-8366-DC6C9278E396}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsService", "MetricsService\MetricsService.csproj", "{CD9FDA6F-99BA-4C27-A262-BEAD1FF9AFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingService", "TracingService\TracingService.csproj", "{BF279D7E-F872-47D5-929F-ED24CDB95AC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{B0685420-033E-4D0A-8366-DC6C9278E396}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0685420-033E-4D0A-8366-DC6C9278E396}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0685420-033E-4D0A-8366-DC6C9278E396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD9FDA6F-99BA-4C27-A262-BEAD1FF9AFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD9FDA6F-99BA-4C27-A262-BEAD1FF9AFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD9FDA6F-99BA-4C27-A262-BEAD1FF9AFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD9FDA6F-99BA-4C27-A262-BEAD1FF9AFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF279D7E-F872-47D5-929F-ED24CDB95AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF279D7E-F872-47D5-929F-ED24CDB95AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF279D7E-F872-47D5-929F-ED24CDB95AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF279D7E-F872-47D5-929F-ED24CDB95AC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

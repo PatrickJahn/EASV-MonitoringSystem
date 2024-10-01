@@ -83,7 +83,7 @@ cd Monitoring_system
 
 2. **Access the Services**:
 
-   - **Monitoring API**: Accessible at `http://localhost:49152`.
+   - **Monitoring API**: Accessible at `http://localhost:49152/swagger`.
    - **RabbitMQ Management UI**: Accessible at `http://localhost:15672`. Use the default credentials specified in the `docker-compose.yml` file.
 
 ### Stopping the System

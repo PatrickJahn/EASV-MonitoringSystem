@@ -68,7 +68,7 @@ Make sure you have the following installed:
 
 ```bash
 git clone https://github.com/PatrickJahn/EASV-MonitoringSystem.git
-cd Monitoring_system
+cd EASV-MonitoringSystem
 ```
 
 ### Run the System

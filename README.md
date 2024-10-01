@@ -84,7 +84,7 @@ cd EASV-MonitoringSystem
 2. **Access the Services**:
 
    - **Monitoring API**: Accessible at `http://localhost:49152/swagger`.
-   - **RabbitMQ Management UI**: Accessible at `http://localhost:15672`. Use the default credentials specified in the `docker-compose.yml` file.
+   - **RabbitMQ Management UI**: Accessible at `http://localhost:15673`. Use the default credentials specified in the `docker-compose.yml` file.
 
 ### Stopping the System
 

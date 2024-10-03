@@ -2,38 +2,31 @@ using EasyNetQ;
 using Shared.Entities.Logs;
 using Shared.Messages.Logs;
 using Shared.Messages.Topics;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace MonitoringAPI.Services
 {
     public class LogServiceRequester
     {
-        private readonly IBus _bus;
-        private readonly TaskCompletionSource<List<LogEvent>> _taskCompletionSource;
+        private readonly HttpClient client = new HttpClient();
+        
 
-        public LogServiceRequester(IBus bus)
-        {
-            _bus = bus;
-            _taskCompletionSource = new TaskCompletionSource<List<LogEvent>>();
-        }
-
-        public async Task<List<LogEvent>> RequestLogsAsync(int page, int pageSize)
+        public async Task<List<LogEvent>?> RequestLogsAsync(int page, int pageSize)
         {
             var requestMessage = new LogRequestMessage
             {
                 Page = page,
                 PageSize = pageSize
             };
-
-            await _bus.PubSub.PublishAsync(requestMessage, ServiceBusTopic.LogRequest.ToString());
-
-            // Wait for the response (consider adding a timeout mechanism)
-            return await _taskCompletionSource.Task;
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://logging-service/LogEvents?page={page}&pageSize={pageSize}");
+            var response = await client.SendAsync(request);
+            
+            var content = response.Content.ReadAsStringAsync().Result;
+            
+            return JsonSerializer.Deserialize<List<LogEvent>>(content);
+            
         }
 
-        // Handle the response from LoggingService
-        public void OnLogResponseReceived(LogResponseMessage response)
-        {
-            _taskCompletionSource.SetResult(response.LogEvents);
-        }
+      
     }
 }

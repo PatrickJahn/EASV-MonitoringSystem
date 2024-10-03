@@ -15,7 +15,6 @@ builder.Services.AddSingleton<IBus>(bus => RabbitHutch.CreateBus(rabbitMqConnect
 // Register MessagePublisher and other services
 builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
 builder.Services.AddScoped<LogServiceRequester>();
-builder.Services.AddSingleton<LogServiceResponseHandler>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -31,10 +30,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-// Ensure that LogServiceResponseHandler starts consuming log responses
-using (var scope = app.Services.CreateScope())
-{
-    var logResponseHandler = scope.ServiceProvider.GetRequiredService<LogServiceResponseHandler>();
-}
+
 
 app.Run();

@@ -23,7 +23,6 @@ namespace LoggingService.Services
             {
                 throw new ArgumentNullException(nameof(logEvent), "Log event cannot be null");
             }
-
             await _database.InsertLogEventAsync(logEvent);
         }
 
@@ -40,6 +39,7 @@ namespace LoggingService.Services
 
             if (pageSize <= 0)
                 throw new ArgumentException("Page size must be greater than zero.", nameof(pageSize));
+            
 
             // Retrieve logs from the database using pagination
             return await _database.GetLogEventsAsync(page, pageSize);

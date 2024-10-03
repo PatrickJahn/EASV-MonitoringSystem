@@ -26,7 +26,7 @@ public class LoggingController : ControllerBase
     public async Task<IActionResult> GetLogs([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var logs = await _logServiceRequester.RequestLogsAsync(page, pageSize);
-
+     
         if (logs == null || !logs.Any())
         {
             return NotFound("No logs found.");

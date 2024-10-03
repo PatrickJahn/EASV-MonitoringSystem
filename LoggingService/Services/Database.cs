@@ -11,6 +11,7 @@ namespace LoggingService.Services
         public Database(string dbHost, string dbUser, string dbPass)
         {
             _connectionString = $"Server={dbHost};User Id={dbUser};Password={dbPass};Encrypt=false;";
+            RecreateDatabaseAsync();
         }
 
         private async Task<SqlConnection> GetDbConnectionAsync()
@@ -77,7 +78,7 @@ namespace LoggingService.Services
             cmd.CommandText = @"
                 INSERT INTO LogEvents (Id, LogEventType, Message, MemberName, FilePath, LineNumber, ErrorDetails, CreatedAt) 
                 VALUES (@Id, @LogEventType, @Message, @MemberName, @FilePath, @LineNumber, @ErrorDetails, @CreatedAt)";
-
+            
             cmd.Parameters.Add(new SqlParameter("@Id", logEvent.Id));
             cmd.Parameters.Add(new SqlParameter("@LogEventType", logEvent.LogEventType));
             cmd.Parameters.Add(new SqlParameter("@Message", logEvent.Message));
@@ -88,6 +89,7 @@ namespace LoggingService.Services
             cmd.Parameters.Add(new SqlParameter("@CreatedAt", logEvent.CreatedAt));
 
             await cmd.ExecuteNonQueryAsync();
+    
         }
 
         // Async method to retrieve paginated log events

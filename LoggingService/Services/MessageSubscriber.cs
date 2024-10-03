@@ -25,7 +25,6 @@ namespace LoggingService.Services
 
             // Subscribe to log events and log requests
             SubscribeToLogEvents();
-            SubscribeToLogRequests();
         }
 
         private static async void SubscribeToLogEvents()
@@ -63,36 +62,8 @@ namespace LoggingService.Services
                 }, x => x.WithTopic(ServiceBusTopic.LogEvent.ToString()));
         }
 
-        private static async void SubscribeToLogRequests()
-        {
-            await bus.PubSub.SubscribeAsync<LogRequestMessage>("LogRequests",
-                async request =>
-                {
-                    // Handle the log request and retrieve logs
-                    try
-                    {
-                        Console.WriteLine("Handling log request...");
-                        var logs = await _logService.GetLogEventsAsync(request.Page, request.PageSize);
 
-                        // Publish the response back to RabbitMQ
-                        await PublishLogResponse(logs);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error processing log request: {ex.Message}");
-                    }
-                },x => x.WithTopic(ServiceBusTopic.LogRequest.ToString()));
-        }
 
-        private static async Task PublishLogResponse(List<LogEvent> logs)
-        {
-            var responseMessage = new LogResponseMessage
-            {
-                LogEvents = logs
-            };
 
-            await bus.PubSub.PublishAsync(responseMessage, "log-response");
-            Console.WriteLine("Published log response.");
-        }
     }
 }

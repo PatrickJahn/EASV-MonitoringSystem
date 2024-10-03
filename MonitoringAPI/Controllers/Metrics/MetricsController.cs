@@ -1,4 +1,4 @@
-namespace MonitoringAPI.Controllers;
+namespace MonitoringAPI.Controllers.Metrics;
 
 public class MetricsController
 {

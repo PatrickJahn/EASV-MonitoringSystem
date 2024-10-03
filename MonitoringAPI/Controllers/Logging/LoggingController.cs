@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MonitoringAPI.Controllers.Logging.Requests;
 using MonitoringAPI.Services;
-using Shared.Entities.Logs;
 using Shared.Messages.Logs;
 
-namespace MonitoringAPI.Controllers;
+namespace MonitoringAPI.Controllers.Logging;
 
 
 [ApiController]

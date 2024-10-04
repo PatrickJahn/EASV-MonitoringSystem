@@ -19,13 +19,13 @@ The **Monitoring System** is built using **C4 architecture** principles, breakin
 
 This diagram shows how the system interacts with external actors, such as the **Developer** who uses a web application to interact with the system.
 
-![System Context Diagram](diagrams/SystemContext-001.png)
+![System Context Diagram](diagrams/structurizr-95669-SystemContext-001.png)
 
 ### Level 2: Container Diagram
 
 This diagram shows the different containers in the system, such as the **Monitoring API**, **Logging Service**, **Metrics Service**, **Tracing Service**, and how they interact with external systems like **RabbitMQ** and **SQL Database**.
 
-![Container Diagram](diagrams/Monitoring-Container-001.png)
+![Container Diagram](diagrams/structurizr-95669-Container-001.png)
 
 ### Level 3: Component Diagrams
 
@@ -35,25 +35,25 @@ Below are component diagrams for each container.
 
 This diagram shows the internal components of the **Monitoring API** container and their interactions.
 
-![Monitoring API Component Diagram](diagrams/Monitoring-api-Component-001.png)
+![Monitoring API Component Diagram](diagrams/structurizr-95669-Component-001.png)
 
 #### Logging Service Component Diagram
 
 This diagram shows the internal components of the **Logging Service** container.
 
-![Logging Service Component Diagram](diagrams/Logging-Component-002.png)
+![Logging Service Component Diagram](diagrams/structurizr-95669-Component-002.png)
 
 #### Metrics Service Component Diagram
 
 This diagram shows the internal components of the **Metrics Service** container.
 
-![Metrics Service Component Diagram](diagrams/Metrics-Component-003.png)
+![Metrics Service Component Diagram](diagrams/structurizr-95669-Component-003.png)
 
 #### Tracing Service Component Diagram
 
 This diagram shows the internal components of the **Tracing Service** container.
 
-![Tracing Service Component Diagram](diagrams/Tracing-Component-004.png)
+![Tracing Service Component Diagram](diagrams/structurizr-95669-Component-004.png)
 
 ## Getting Started
 

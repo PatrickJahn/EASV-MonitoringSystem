@@ -30,14 +30,14 @@ services:
     build:
       context: .
       dockerfile: MonitoringAPI/Dockerfile
-    ports:
-      - "49152:80"
+    # ports:
+    #  - "49152:80" used for testing.
     depends_on:
       - rabbitmq
     networks:
       - app-network
-   # deploy:
-    #  replicas: 2  
+    deploy:
+      replicas: 2
     environment:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672

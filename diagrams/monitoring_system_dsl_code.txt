@@ -1,82 +1,66 @@
-workspace "Monitoring System Architecture" "C4 model diagrams for the Monitoring System" {
+workspace "Monitoring System Architecture" "C4 model diagrams for the Monitoring System (using HTTP and RabbitMQ)" {
 
     model {
-        # Define the developer and web application in the system
         developer = person "Developer" "A developer who uses the web application to interact with the Monitoring System."
 
         # Group the Monitoring System under a named group
         group "Monitoring System" {
-            # Define the Monitoring System
-            monitoring_system = softwareSystem "Monitoring System" "Collects and processes logs, metrics, and traces."{
+            monitoring_system = softwareSystem "Monitoring System" "Collects and processes logs, metrics, and traces using HTTP requests and RabbitMQ."{
                 
                 # Containers inside the Monitoring System
-                monitoring_api = container "Monitoring API" "Exposes API for sending and retrieving logs, metrics, and traces." "C#, .NET"{
-                     logging_controller = component "LoggingController" "Handles logging requests from the web application." "C#"
-                     log_service_requester = component "LogServiceRequester" "Sends log service requests." "C#"
-                     log_service_response_handler = component "LogServiceResponseHandler" "Handles responses from the log service." "C#"
-                     metrics_publisher = component "MetricsPublisher" "Publishes metrics data to RabbitMQ." "C#"
-                     tracing_publisher = component "TracingPublisher" "Publishes tracing data to RabbitMQ." "C#"
+                monitoring_api = container "Monitoring API" "Exposes API for sending and retrieving logs, metrics, and traces via HTTP and RabbitMQ." "C#, .NET"{
+                     logging_controller = component "LoggingController" "Handles logging requests from the web application via HTTP and RabbitMQ." "C#"
+                     metrics_controller = component "MetricsController" "Handles metrics requests from the web application via HTTP and RabbitMQ." "C#"
+                     tracing_controller = component "TracingController" "Handles tracing requests from the web application via HTTP and RabbitMQ." "C#"
+                     log_service_requester = component "LogServiceRequester" "Sends HTTP log service requests to LoggingService." "C#"
+                     message_publisher = component "MessagePublisher" "Publishes log events to RabbitMQ." "C#"
                 }
 
                 logging_service = container "Logging Service" "Processes and stores logs." "C#, .NET"{
-                    database = component "Database" "Handles log storage in SQL." "C#"
-                    log_service = component "LogService" "Manages log processing and retrieval." "C#"
-                    message_subscriber = component "MessageSubscriber" "Subscribes to log messages from RabbitMQ." "C#"
-                    log_request_handler = component "LogRequestHandler" "Handles log requests from Monitoring API." "C#"
-                    log_response_handler = component "LogResponseHandler" "Processes log responses and sends them to Monitoring API." "C#"
+                    log_events_controller = component "LogEventsController" "Handles HTTP GET requests for retrieving logs." "C#"
+                    log_service = component "LogService" "Manages log processing and retrieval via HTTP." "C#"
                 }
 
                 metrics_service = container "Metrics Service" "Processes and stores metrics data." "C#, .NET"{
-                    metrics_storage = component "MetricsStorage" "Stores metrics data." "SQL Database"
-                    metrics_processor = component "MetricsProcessor" "Processes incoming metrics data." "C#"
-                    metrics_subscriber = component "MetricsSubscriber" "Subscribes to metrics data from RabbitMQ." "C#"
+                    metrics_events_controller = component "MetricsEventsController" "Handles HTTP GET requests for retrieving logs." "C#"
+                    metrics_event_service = component "MetricsEventService" "Manages metrics processing and retrieval via HTTP." "C#"
                 }
 
                 tracing_service = container "Tracing Service" "Manages distributed tracing data." "C#, .NET"{
-                    tracing_storage = component "TracingStorage" "Stores tracing data." "SQL Database"
-                    tracing_processor = component "TracingProcessor" "Processes incoming tracing data." "C#"
-                    tracing_subscriber = component "TracingSubscriber" "Subscribes to tracing data from RabbitMQ." "C#"
+                    tracing_events_controller = component "TracingEventsController" "Handles HTTP GET requests for retrieving logs." "C#"
+                    tracing_event_service = component "TracingEventService" "Manages traces processing and retrieval via HTTP." "C#"
                 }
             }
 
         }
 
         # External systems that the Monitoring System interacts with
-        rabbitmq = softwareSystem "RabbitMQ" "Message broker for asynchronous communication."
+        rabbitmq = softwareSystem "RabbitMQ" "Message broker for asynchronous communication in MonitoringAPI."
         sql_database = softwareSystem "SQL Database" "Stores logs, metrics, and traces."
 
         # Relationships for Level 1 (System Context)
         developer -> monitoring_api "Uses via web application"
-        monitoring_api -> rabbitmq "Publishes log, metric, and trace messages asynchronously"
-        monitoring_api -> logging_service "Interacts with"
-        monitoring_api -> metrics_service "Interacts with"
-        monitoring_api -> tracing_service "Interacts with"
+        monitoring_api -> rabbitmq "Publishes log messages asynchronously"
+        monitoring_api -> logging_service "Sends HTTP requests to"
+        monitoring_api -> metrics_service "Sends HTTP requests to"
+        monitoring_api -> tracing_service "Sends HTTP requests to"
         logging_service -> sql_database "Stores logs in"
         metrics_service -> sql_database "Stores metrics in"
         tracing_service -> sql_database "Stores tracing data in"
 
         # Define relationships between components within Monitoring API
-        logging_controller -> log_service_requester "Requests logs from the Logging Service"
-        log_service_requester -> log_service_response_handler "Handles responses from the Logging Service"
-        log_service_response_handler -> logging_controller "Provides log responses"
-        logging_controller -> metrics_publisher "Publishes metrics data to RabbitMQ"
-        logging_controller -> tracing_publisher "Publishes tracing data to RabbitMQ"
+        logging_controller -> log_service_requester "Requests logs from Logging Service via HTTP"
+        logging_controller -> message_publisher "Publishes log events to RabbitMQ"
 
         # Define relationships within Logging Service
-        message_subscriber -> log_service "Processes incoming log messages"
-        log_service -> database "Stores and retrieves logs"
-        log_request_handler -> log_service "Retrieves logs on request"
-        log_response_handler -> log_request_handler "Processes log responses"
-
+        log_events_controller -> log_service "Retrieves logs via HTTP"
+        log_service -> sql_database "Stores and retrieves logs"
         # Define relationships within Metrics Service
-        metrics_subscriber -> metrics_processor "Processes incoming metrics data"
-        metrics_processor -> metrics_storage "Stores processed metrics"
-        metrics_storage -> sql_database "Stores metrics data in SQL Database"
-
+        metrics_events_controller -> metrics_event_service "Retrieves metrics via HTTP"
+        metrics_event_service -> sql_database "Stores and retrieves metrics"
         # Define relationships within Tracing Service
-        tracing_subscriber -> tracing_processor "Processes incoming tracing data"
-        tracing_processor -> tracing_storage "Stores processed tracing data"
-        tracing_storage -> sql_database "Stores tracing data in SQL Database"
+        tracing_events_controller -> tracing_event_service "Retrieves traces via HTTP"
+        tracing_event_service -> sql_database "Stores and retrieves traces"
     }
 
     views {
@@ -103,27 +87,16 @@ workspace "Monitoring System Architecture" "C4 model diagrams for the Monitoring
             include *
             autoLayout
         }
-
         # Component View for Metrics Service (Level 3)
         component metrics_service {
             include *
             autoLayout
         }
-
         # Component View for Tracing Service (Level 3)
         component tracing_service {
             include *
             autoLayout
         }
-
         theme default
-
-        # Comment: Legend for reviewers (should be provided in documentation):
-        // Box colors:
-        // - Green: Person (e.g., Developer)
-        // - Blue: Software systems and containers
-        // Line styles:
-        // - Solid: Synchronous interaction
-        // - Dashed: Asynchronous interaction (e.g., RabbitMQ)
     }
 }
